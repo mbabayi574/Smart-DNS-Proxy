@@ -1,0 +1,17 @@
+{
+  "dnsServer": {
+    "port": 53,
+    "cacheSize": 1000,
+    "logQueries": true
+  },
+  "alternativeDNS": [
+    "8.8.8.8",
+    "1.1.1.1"
+  ],
+  "webInterface": {
+    "port": 5000,
+    "enableAuth": false,
+    "username": "admin",
+    "password": "admin"
+  }
+}

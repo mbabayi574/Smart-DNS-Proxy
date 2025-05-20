@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart DNS Proxy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4>Smart DNS Proxy</h4>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#dashboard-section" id="dashboard-tab">
+                                <i data-feather="home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#domains-section" id="domains-tab">
+                                <i data-feather="list"></i>
+                                Domain List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#settings-section" id="settings-tab">
+                                <i data-feather="settings"></i>
+                                Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#logs-section" id="logs-tab">
+                                <i data-feather="file-text"></i>
+                                Logs
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="content-section active">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-primary" id="refresh-status">
+                                    <i data-feather="refresh-cw"></i> Refresh
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">DNS Status</h5>
+                                    <p class="card-text dns-status">
+                                        <span class="status-indicator running">
+                                            <i data-feather="check-circle"></i> Running
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Domains</h5>
+                                    <p class="card-text"><span id="domains-count">0</span> domains configured</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">DNS Queries</h5>
+                                    <p class="card-text"><span id="dns-queries">0</span> today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cache</h5>
+                                    <p class="card-text"><span id="cache-size">0</span> entries</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">System Information</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td>DNS Server Version:</td>
+                                                    <td id="dns-version">Dnsmasq v2.85</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>DNS Server Port:</td>
+                                                    <td id="dns-port">53</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Uptime:</td>
+                                                    <td id="system-uptime">1 day, 2 hours</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Configuration Update:</td>
+                                                    <td id="last-update">2023-06-08 14:30:22</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domains Section -->
+                <section id="domains-section" class="content-section">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Domain List</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDomainModal">
+                                <i data-feather="plus"></i> Add Domain
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="domains-table">
+                            <thead>
+                                <tr>
+                                    <th>Domain</th>
+                                    <th>Resolved via</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="domains-list">
+                                <!-- Domains will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="content-section">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Settings</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-sm btn-primary" id="save-settings">
+                                <i data-feather="save"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+
+                    <form id="settings-form">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                DNS Server Settings
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="dns-server-port" class="form-label">DNS Server Port</label>
+                                        <input type="number" class="form-control" id="dns-server-port" name="dnsServer.port" value="53">
+                                        <div class="form-text">Default DNS port is 53</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="cache-size-input" class="form-label">Cache Size</label>
+                                        <input type="number" class="form-control" id="cache-size-input" name="dnsServer.cacheSize" value="1000">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="log-queries" name="dnsServer.logQueries" checked>
+                                            <label class="form-check-label" for="log-queries">Log DNS Queries</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                Alternative DNS Servers
+                            </div>
+                            <div class="card-body">
+                                <div id="alternative-dns-container">
+                                    <!-- Dynamically populated -->
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="add-dns-server">
+                                    <i data-feather="plus"></i> Add DNS Server
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                Web Interface Settings
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="web-port" class="form-label">Web Interface Port</label>
+                                        <input type="number" class="form-control" id="web-port" name="webInterface.port" value="5000">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enable-auth" name="webInterface.enableAuth">
+                                            <label class="form-check-label" for="enable-auth">Enable Authentication</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 auth-fields" style="display: none;">
+                                    <div class="col-md-6">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="webInterface.username" value="admin">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="webInterface.password">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Logs Section -->
+                <section id="logs-section" class="content-section">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Logs</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="refresh-logs">
+                                    <i data-feather="refresh-cw"></i> Refresh
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="clear-logs">
+                                    <i data-feather="trash-2"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="logs-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="dns-logs-tab" data-bs-toggle="tab" href="#dns-logs">DNS Queries</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="access-logs-tab" data-bs-toggle="tab" href="#access-logs">System Logs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="error-logs-tab" data-bs-toggle="tab" href="#error-logs">Error Logs</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="logs-tabs-content">
+                                <div class="tab-pane fade show active" id="dns-logs" role="tabpanel">
+                                    <pre id="dns-logs-content" class="logs-container"></pre>
+                                </div>
+                                <div class="tab-pane fade" id="access-logs" role="tabpanel">
+                                    <pre id="access-logs-content" class="logs-container"></pre>
+                                </div>
+                                <div class="tab-pane fade" id="error-logs" role="tabpanel">
+                                    <pre id="error-logs-content" class="logs-container"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Domain Modal -->
+    <div class="modal fade" id="addDomainModal" tabindex="-1" aria-labelledby="addDomainModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDomainModalLabel">Add New Domain</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-domain-form">
+                        <div class="mb-3">
+                            <label for="domain-name" class="form-label">Domain Name</label>
+                            <input type="text" class="form-control" id="domain-name" placeholder="example.com">
+                            <div class="form-text">Enter the domain name without 'http://' or 'https://'</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dns-server" class="form-label">Resolve Via DNS Server</label>
+                            <input type="text" class="form-control" id="dns-server" placeholder="8.8.8.8">
+                            <div class="form-text">Enter the IP address of the DNS server to use for this domain</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="add-domain-btn">Add Domain</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete the domain <strong id="delete-domain-name"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "domains": [
+    {
+      "domain": "netflix.com",
+      "resolveVia": "1.1.1.1"
+    },
+    {
+      "domain": "spotify.com",
+      "resolveVia": "8.8.8.8"
+    },
+    {
+      "domain": "hulu.com",
+      "resolveVia": "1.1.1.1"
+    },
+    {
+      "domain": "amazon.com",
+      "resolveVia": "8.8.8.8"
+    },
+    {
+      "domain": "hbo.com",
+      "resolveVia": "1.1.1.1"
+    }
+  ]
+}

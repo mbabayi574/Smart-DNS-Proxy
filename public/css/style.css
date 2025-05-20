@@ -1,0 +1,200 @@
+/* Main Styling for Smart DNS Proxy */
+
+body {
+    font-size: .875rem;
+    background-color: #f8f9fa;
+}
+
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: static;
+        height: auto;
+        padding-top: 1rem;
+        box-shadow: none;
+    }
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+}
+
+/* Content sections */
+.content-section {
+    display: none;
+    padding-top: 1.5rem;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Status indicators */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+.status-indicator.running {
+    color: #28a745;
+}
+
+.status-indicator.stopped {
+    color: #dc3545;
+}
+
+.status-indicator .feather {
+    margin-right: 0.25rem;
+}
+
+/* Card customization */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: none;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Tables */
+.table th {
+    font-weight: 600;
+    font-size: 0.825rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Logs container */
+.logs-container {
+    background-color: #212529;
+    color: #f8f9fa;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    height: 400px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+}
+
+/* DNS entry in the table */
+.dns-entry-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dns-entry-actions button {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Alternative DNS servers in settings */
+.alternative-dns-entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.alternative-dns-entry input {
+    margin-right: 0.5rem;
+}
+
+/* Form customization */
+.form-label {
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Buttons customization */
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    main {
+        padding-top: 1rem;
+    }
+    
+    .logs-container {
+        height: 300px;
+    }
+}
+
+/* Modal customization */
+.modal-content {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    border-bottom-color: #e9ecef;
+}
+
+.modal-footer {
+    border-top-color: #e9ecef;
+}

@@ -1,0 +1,20 @@
+[2025-05-20T13:25:09.072Z] ERROR: Failed to initialize DNS configuration: Command failed: mkdir -p /etc/dnsmasq.d
+mkdir: cannot create directory ‘/etc/dnsmasq.d’: Read-only file system
+
+[2025-05-20T13:25:09.073Z] ERROR: Failed to initialize DNS configuration: Command failed: mkdir -p /etc/dnsmasq.d
+mkdir: cannot create directory ‘/etc/dnsmasq.d’: Read-only file system
+
+[2025-05-20T13:25:11.277Z] ERROR: Failed to get dnsmasq version: Command failed: dnsmasq --version
+/bin/sh: 1: dnsmasq: not found
+
+[2025-05-20T13:25:11.282Z] ERROR: Failed to get system uptime: Command failed: uptime -p
+uptime: invalid option -- 'p'
+Try 'uptime --help' for more information.
+
+[2025-05-20T13:25:13.810Z] ERROR: Failed to get dnsmasq version: Command failed: dnsmasq --version
+/bin/sh: 1: dnsmasq: not found
+
+[2025-05-20T13:25:13.814Z] ERROR: Failed to get system uptime: Command failed: uptime -p
+uptime: invalid option -- 'p'
+Try 'uptime --help' for more information.
+

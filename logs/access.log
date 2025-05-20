@@ -1,0 +1,39 @@
+[2025-05-20T13:25:09.059Z] INFO: Server started on port 5000
+[2025-05-20T13:25:09.061Z] INFO: Initializing DNS configuration
+[2025-05-20T13:25:11.247Z] INFO: GET /api/status
+[2025-05-20T13:25:11.257Z] INFO: GET /api/domains
+[2025-05-20T13:25:11.260Z] INFO: GET /api/settings
+[2025-05-20T13:25:11.261Z] INFO: GET /api/logs/dns
+[2025-05-20T13:25:11.265Z] INFO: GET /api/logs/access
+[2025-05-20T13:25:11.268Z] INFO: GET /api/logs/error
+[2025-05-20T13:25:13.801Z] INFO: GET /api/status
+[2025-05-20T13:25:13.812Z] INFO: GET /api/domains
+[2025-05-20T13:25:13.836Z] INFO: GET /api/logs/dns
+[2025-05-20T13:25:13.844Z] INFO: GET /api/logs/access
+[2025-05-20T13:25:13.855Z] INFO: GET /api/settings
+[2025-05-20T13:25:14.072Z] INFO: GET /api/logs/error
+[2025-05-20T13:27:39.719Z] INFO: SIGTERM received, shutting down gracefully
+[2025-05-20T13:27:40.937Z] INFO: Initializing DNS configuration
+[2025-05-20T13:27:40.924Z] INFO: Server started on port 5000
+[2025-05-20T13:27:40.941Z] INFO: Generating DNS configuration
+[2025-05-20T13:27:40.942Z] INFO: DNS configuration generated at /home/runner/workspace/data/dns_config/smartdns.conf
+[2025-05-20T13:27:40.943Z] INFO: DNS configuration initialized successfully
+[2025-05-20T13:27:40.943Z] INFO: DNS configuration initialized successfully
+[2025-05-20T13:27:43.838Z] INFO: GET /api/status
+[2025-05-20T13:27:43.863Z] INFO: GET /api/domains
+[2025-05-20T13:27:43.865Z] INFO: GET /api/settings
+[2025-05-20T13:27:43.866Z] INFO: GET /api/logs/dns
+[2025-05-20T13:27:44.127Z] INFO: GET /api/logs/access
+[2025-05-20T13:27:44.132Z] INFO: GET /api/logs/error
+[2025-05-20T13:27:49.195Z] INFO: GET /api/status
+[2025-05-20T13:27:49.202Z] INFO: GET /api/domains
+[2025-05-20T13:27:49.203Z] INFO: GET /api/settings
+[2025-05-20T13:27:49.205Z] INFO: GET /api/logs/dns
+[2025-05-20T13:27:49.206Z] INFO: GET /api/logs/access
+[2025-05-20T13:27:49.208Z] INFO: GET /api/logs/error
+[2025-05-20T13:27:51.086Z] INFO: GET /api/status
+[2025-05-20T13:27:51.087Z] INFO: GET /api/settings
+[2025-05-20T13:27:51.088Z] INFO: GET /api/domains
+[2025-05-20T13:27:51.091Z] INFO: GET /api/logs/access
+[2025-05-20T13:27:51.092Z] INFO: GET /api/logs/error
+[2025-05-20T13:27:51.093Z] INFO: GET /api/logs/dns
