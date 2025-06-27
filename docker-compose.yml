@@ -12,8 +12,8 @@ services:
       - "53:53/tcp"
       - "5000:5000"
     volumes:
-      - ./data:/app/data
-      - ./logs:/app/logs
+      - ./data:/data
+      - ./logs:/logs
     cap_add:
       - NET_ADMIN
     networks:
