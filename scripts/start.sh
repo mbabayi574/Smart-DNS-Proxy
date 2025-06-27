@@ -15,28 +15,28 @@ if ! which dnsmasq >/dev/null 2>&1; then
 fi
 
 # Ensure logs directory exists
-mkdir -p /app/logs
+mkdir -p /root/smart-dns-proxy/logs
 
 # Ensure data directory exists
-mkdir -p /app/data
+mkdir -p /root/smart-dns-proxy/data
 
 # Ensure dnsmasq.d directory exists
 mkdir -p /etc/dnsmasq.d
 
 # Initialize configuration if it doesn't exist
-if [ ! -f "/app/data/config.json" ]; then
-    echo '{"dnsServer":{"port":53,"cacheSize":1000,"logQueries":true},"alternativeDNS":["8.8.8.8","1.1.1.1"],"webInterface":{"port":5000,"enableAuth":false,"username":"admin","password":"admin"}}' > /app/data/config.json
+if [ ! -f "/root/smart-dns-proxy/data/config.json" ]; then
+    echo '{"dnsServer":{"port":53,"cacheSize":1000,"logQueries":true},"alternativeDNS":["8.8.8.8","1.1.1.1"],"webInterface":{"port":5000,"enableAuth":false,"username":"admin","password":"admin"}}' > /root/smart-dns-proxy/data/config.json
     echo "Created default configuration."
 fi
 
-if [ ! -f "/app/data/ips.json" ]; then
-    echo '{"domains":[{"domain":"netflix.com","resolveVia":"1.1.1.1"},{"domain":"spotify.com","resolveVia":"8.8.8.8"}]}' > /app/data/ips.json
+if [ ! -f "/root/smart-dns-proxy/data/ips.json" ]; then
+    echo '{"domains":[{"domain":"netflix.com","resolveVia":"1.1.1.1"},{"domain":"spotify.com","resolveVia":"8.8.8.8"}]}' > /root/smart-dns-proxy/data/ips.json
     echo "Created default IP list."
 fi
 
 # Update dnsmasq configuration
 echo "Configuring dnsmasq..."
-node /app/scripts/configure-dnsmasq.js
+node /root/smart-dns-proxy/scripts/configure-dnsmasq.js
 
 # Start dnsmasq
 echo "Starting dnsmasq service..."
@@ -47,4 +47,4 @@ service dnsmasq restart || {
 
 # Start the web interface
 echo "Starting web interface..."
-cd /app && node app.js
+cd /root/smart-dns-proxy && node app.js
