@@ -10,7 +10,7 @@
   ],
   "webInterface": {
     "port": 5000,
-    "enableAuth": false,
+    "enableAuth": true,
     "username": "admin",
     "password": "admin"
   }
