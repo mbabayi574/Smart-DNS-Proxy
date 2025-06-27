@@ -26,7 +26,7 @@ This Smart DNS Proxy system allows you to route DNS queries for specific domains
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/smart-dns-proxy.git
+   git clone https://github.com/hosh3iyah/smart-dns-proxy.git
    cd smart-dns-proxy
    ```
 
