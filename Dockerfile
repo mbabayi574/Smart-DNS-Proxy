@@ -1,8 +1,8 @@
 # Smart DNS Proxy Dockerfile
 
-FROM node:16-alpine
+FROM node:22-alpine
 
-# Install Dnsmasq
+# Install DNSmasq
 RUN apk update && \
     apk add --no-cache dnsmasq bash
 
